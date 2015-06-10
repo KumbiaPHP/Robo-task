@@ -19,3 +19,11 @@ Obsoletos (se usan igual)
 - [ ] ``Flash::notice`` a ``Flash::info``
 - [ ] ``Flash::success`` a ``Flash::valid()``
 - [ ] ``Util::uncamelize`` a ``Util::smallcase``
+
+
+Eliminar
+
+- [ ] ``Load::lib()``
+- [ ] ``Load::coreLib()``
+
+ 
