@@ -19,11 +19,25 @@ Obsoletos (se usan igual)
 - [ ] ``Flash::notice`` a ``Flash::info``
 - [ ] ``Flash::success`` a ``Flash::valid()``
 - [ ] ``Util::uncamelize`` a ``Util::smallcase``
+- [ ] ``View::response('view')`` a ``View::template(null)``
+- [ ] ``Util::mkpath()`` a ``FileUtil::mkdir()``
+- [ ] ``Util::removedir()`` a ``FileUtil::rmdir()``
+- [ ] ``Util::array_merge_overwrite($a1, $a2)`` a ``$a2 + $a1``
+- [ ] ``Util::array_insert($array, $position, $insert)`` a ``array_splice($array, $position, 0, $insert)``
+- [ ] ``Html::trClass()`` a ??  css
+- 
 
 
 Eliminar
 
 - [ ] ``Load::lib()``
 - [ ] ``Load::coreLib()``
+- [ ] ``View::helpers()``
 
- 
+Obsoleto (no se puede pasar de beta1 a 1.0) primera comprobación para informar y parar
+
+- ApplicationController
+- tags.php
+- lib report
+
+
