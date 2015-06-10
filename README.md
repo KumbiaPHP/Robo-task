@@ -36,7 +36,7 @@ Eliminar
 
 Obsoleto (no se puede pasar de beta1 a 1.0) primera comprobación para informar y parar
 
-- ApplicationController
+- extends ApplicationController
 - tags.php
 - lib report
 
