@@ -32,6 +32,7 @@ Eliminar
 
 - [ ] ``Load::lib()``
 - [ ] ``Load::coreLib()``
+- [ ] ``Load::models()``
 - [ ] ``View::helpers()``
 
 Obsoleto (no se puede pasar de beta1 a 1.0) primera comprobación para informar y parar
