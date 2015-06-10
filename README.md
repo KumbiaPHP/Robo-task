@@ -43,8 +43,8 @@ Obsoleto (no se puede pasar de beta1 a 1.0) primera comprobación para informar 
 
 Falta documentar cambios de:
 
-timezone
-locale
-encoding
-error_reporting (posiblemente)
+- timezone
+- locale
+- encoding
+- error_reporting (posiblemente)
 
