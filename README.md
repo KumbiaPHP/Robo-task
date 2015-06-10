@@ -9,8 +9,11 @@ Esta lista de cambios también es útil para quien quiera pasar sus apps manualm
 
 ## Cambios
 
+Obsoletos (se usan igual)
+
 - [ ] ``Router::redirect`` a ``Redirect::to``
 - [ ] ``Router::toAction`` a ``Redirect::toAction``
 - [ ] ``Router::route_to`` a ``Redirect::route_to``
 - [ ] ``Flash::notice`` a ``Flash::info``
 - [ ] ``Flash::success`` a ``Flash::valid()``
+- [ ] ``Util::uncamelize`` a ``Util::smallcase``
