@@ -5,6 +5,8 @@ Robo es un manejador de tareas en php http://robo.li al estilo de Gulp en javasc
 
 Normalmente usaremos la tarea replace: http://robo.li/tasks/File/#replace para modificar los ficheros del directorio ``default`` o el nombre de la carpeta de la app.
 
+También podemos compartir tareas que nos sean útiles para KumbiaPHP o para desarrollo.
+
 Esta lista de cambios también es útil para quien quiera pasar sus apps manualmente.
 
 ## Cambios
