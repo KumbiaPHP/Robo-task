@@ -17,6 +17,7 @@ robo                    |  Lista los comandos
 robo kumbia:cache-clean |  Limpia la cache de la app
 robo kumbia:update      |  Copia la aplicación y la actualiza a v1.0 (no esta terminado)
 
+TIP: Usa una aplicación DIFF para ver las diferencias entre las dos carpetas.
 
 # Información sobre el progreso
 Crear una tarea en robo, para automatizar pasar aplicaciones beta2 - v0.9 a v1.0
