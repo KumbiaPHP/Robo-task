@@ -4,7 +4,7 @@ Robo es un manejador de tareas en php http://robo.li al estilo de Gulp en javasc
 Tareas listas para aplicaciones de KumbiaPHP
 
 # Uso
-Copiar en la carpeta default (o carpeta de la aplicación), al lado de app y public.
+Copiar `RoboFile.php` en la carpeta default (o carpeta de la aplicación), al lado de app y public.
 
 Tener `Robo` instalado global (recomendado) o con composer.
 
