@@ -15,7 +15,7 @@ comando | acción
 ------- | ------
 robo                    |  Lista los comandos
 robo kumbia:cache-clean |  Limpia la cache de la app
-robo kumbia:update      |  Copia la app y la actualiza a v1.0 (no esta terminado)
+robo kumbia:update      |  Copia la aplicación y la actualiza a v1.0 (no esta terminado)
 
 
 # Información sobre el progreso
