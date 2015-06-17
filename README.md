@@ -1,4 +1,8 @@
 # Robo-task
+Copiar en la carpeta default (o carpeta de la aplicación), al lado de app y public.
+Tener Robo instalado global (recomendado) o con conposer.
+
+
 Crear una tarea en robo, para automatizar pasar aplicaciones beta2 - v0.9 a v1.0
 
 Robo es un manejador de tareas en php http://robo.li al estilo de Gulp en javascript.
@@ -13,13 +17,13 @@ Esta lista de cambios también es útil para quien quiera pasar sus apps manualm
 
 Obsoletos (se usan igual)
 
-- [ ] ``Router::redirect`` a ``Redirect::to``
-- [ ] ``Router::toAction`` a ``Redirect::toAction``
-- [ ] ``Router::route_to`` a ``Redirect::route_to``
-- [ ] ``Flash::notice`` a ``Flash::info``
-- [ ] ``Flash::success`` a ``Flash::valid()``
-- [ ] ``Util::uncamelize`` a ``Util::smallcase``
-- [ ] ``View::response('view')`` a ``View::template(null)``
+- [x] ``Router::redirect`` a ``Redirect::to``
+- [x] ``Router::toAction`` a ``Redirect::toAction``
+- [x] ``Router::route_to`` a ``Redirect::route_to``
+- [x] ``Flash::notice`` a ``Flash::info``
+- [x] ``Flash::success`` a ``Flash::valid()``
+- [x] ``Util::uncamelize`` a ``Util::smallcase``
+- [x] ``View::response('view')`` a ``View::template(null)``
 - [ ] ``Util::mkpath()`` a ``FileUtil::mkdir()``
 - [ ] ``Util::removedir()`` a ``FileUtil::rmdir()``
 - [ ] ``Util::array_merge_overwrite($a1, $a2)`` a ``$a2 + $a1``
