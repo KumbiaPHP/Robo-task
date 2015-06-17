@@ -8,7 +8,7 @@ Copiar `RoboFile.php` en la carpeta default (o carpeta de la aplicación), al la
 
 Tener `Robo` instalado global (recomendado) o con composer.
 
-En el directorio de la aplicacion donde se ha copiado el RoboFile.php, usar estos comandos en la consola:
+En el directorio de la aplicación donde se ha copiado el RoboFile.php, usar estos comandos en la consola:
 
 
 comando | acción
