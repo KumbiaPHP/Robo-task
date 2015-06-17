@@ -6,7 +6,7 @@ Tareas listas para aplicaciones de KumbiaPHP
 # Uso
 Copiar en la carpeta default (o carpeta de la aplicación), al lado de app y public.
 
-Tener Robo instalado global (recomendado) o con conposer.
+Tener `Robo` instalado global (recomendado) o con composer.
 
 En el directorio de la aplicacion donde se ha copiado el RoboFile.php, usar estos comandos en la consola:
 
