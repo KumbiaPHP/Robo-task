@@ -4,11 +4,14 @@ Copiar en la carpeta default (o carpeta de la aplicación), al lado de app y pub
 Tener Robo instalado global (recomendado) o con conposer.
 
 # Uso
-robo                      Lista los comandos
-robo kumbia:cache-clean   Limpia la cache de la app
-robo kumbia:update        Copia la app y la actualiza a v1.0 (no esta terminado)
+comando | acción
+------- | ------
+robo                    |  Lista los comandos
+robo kumbia:cache-clean |  Limpia la cache de la app
+robo kumbia:update      |  Copia la app y la actualiza a v1.0 (no esta terminado)
 
 
+# Información sobre el progreso
 Crear una tarea en robo, para automatizar pasar aplicaciones beta2 - v0.9 a v1.0
 
 Robo es un manejador de tareas en php http://robo.li al estilo de Gulp en javascript.
