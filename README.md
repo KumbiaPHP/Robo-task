@@ -11,7 +11,7 @@ Tener `Robo` instalado global (recomendado) o con composer.
 En el directorio de la aplicación donde se ha copiado el RoboFile.php, usar estos comandos en la consola:
 
 
-comando | acción
+Comando | Acción
 ------- | ------
 robo                    |  Lista los comandos
 robo kumbia:cache-clean |  Limpia la cache de la app
