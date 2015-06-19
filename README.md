@@ -13,10 +13,10 @@ En el directorio de la aplicación donde se ha copiado el RoboFile.php, usar est
 
 Comando | Acción
 ------- | ------
-robo                    |  Lista los comandos
-robo kumbia:cache-clean |  Limpia la cache de la app
-robo kumbia:update      |  Copia la aplicación y la actualiza a v1.0 (no esta terminado)
-robo kumbia:echo-segun-php54 | Actualiza antiguo <?php echo a <?= de PHP 5.4
+robo                    | Lista los comandos
+robo kumbia:cache-clean | Limpia la cache de la app
+robo kumbia:update      | Copia la aplicación y la actualiza a v1.0 (no esta terminado)
+robo kumbia:echo-short  | Actualiza <?php echo a <?= PHP 5.4+
 
 
 TIP: Usa una aplicación DIFF para ver las diferencias entre las dos carpetas.
