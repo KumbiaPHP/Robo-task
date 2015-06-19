@@ -46,7 +46,7 @@ Obsoletos (se usan igual)
 - [ ] ``Util::array_merge_overwrite($a1, $a2)`` a ``$a2 + $a1``
 - [ ] ``Util::array_insert($array, $position, $insert)`` a ``array_splice($array, $position, 0, $insert)``
 - [ ] ``Html::trClass()`` a ??  css
-
+- [ ] ``<?php ech()`` a ``<?= h()``
 
 
 Eliminar
