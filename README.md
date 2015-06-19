@@ -16,6 +16,8 @@ Comando | Acción
 robo                    |  Lista los comandos
 robo kumbia:cache-clean |  Limpia la cache de la app
 robo kumbia:update      |  Copia la aplicación y la actualiza a v1.0 (no esta terminado)
+robo kumbia:echo-segun-php54 | Actualiza antiguo <?php echo a <?= de PHP 5.4
+
 
 TIP: Usa una aplicación DIFF para ver las diferencias entre las dos carpetas.
 
@@ -68,4 +70,3 @@ Falta documentar cambios de:
 - locale
 - encoding
 - error_reporting (posiblemente)
-
