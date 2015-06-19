@@ -45,6 +45,7 @@ Obsoletos (se usan igual)
 - [x] ``View::response('view')`` a ``View::template(null)``
 - [ ] ``Util::mkpath()`` a ``FileUtil::mkdir()``
 - [ ] ``Util::removedir()`` a ``FileUtil::rmdir()``
+- [ ] ``Util::lcfirst()`` a ``lcfirst()``
 - [ ] ``Util::array_merge_overwrite($a1, $a2)`` a ``$a2 + $a1``
 - [ ] ``Util::array_insert($array, $position, $insert)`` a ``array_splice($array, $position, 0, $insert)``
 - [ ] ``Html::trClass()`` a ??  css
