@@ -12,9 +12,9 @@ class RoboFile extends \Robo\Tasks
 {
     private $newdir;
     private $suffix = '1.0';
-    
+
     private $files;
-    
+
     private $changes = array(
         'Router::toAction(' => 'Redirect::toAction(',
         'Router::to(' => 'Redirect::to(',
@@ -23,13 +23,13 @@ class RoboFile extends \Robo\Tasks
         'Flash::success(' => 'Flash::valid(',
         'Util::uncamelize(' => 'Util::smallcase(',
         "View::response('view')" => "View::template(null)"
-        
+
     );
-    
+
     private $delete = array();
-    
+
     // define public methods as commands
-    
+
     /**
     * @description Convertir una app beta2-0.9 a 1.0
     */
@@ -43,16 +43,16 @@ class RoboFile extends \Robo\Tasks
             $this->_copyDir(__DIR__, $this->newdir);
         }
         //$this->dir($this->newdir);
-        
+
         $this->files();
         $this->kumbiaChanges();
-        
-        
+
+
     }
-    
+
     private function kumbiaChanges() {
         foreach($this->changes as $from=>$to) {
-        
+
             $this->say("Cambiando $from a $to");
             foreach($this->files as $file) {
                 $this->taskReplaceInFile($file)
@@ -72,20 +72,32 @@ class RoboFile extends \Robo\Tasks
         }
     }
 
-    
+
     private function files($dir = '/app', $extension = '*.php') {
-        
+
         $this->files = Finder::create()
             ->name($extension)
             ->in($this->newdir.$dir);
-        $this->say(count($this->files).' ficheros'); 
+        $this->say(count($this->files).' ficheros');
     }
-    
+
     /**
     * @description Borrar la cache de la applicación
     */
     public function kumbiaCacheClean() {
         $this->_cleanDir('app/temp/cache');
         $this->say('<info>Cache borrada.</info>');
+    }
+
+    public function kumbiaEchoSegunPhp54($dir = 'app/views', $extension = "*.phtml"){
+      $this->say('<info>actualizando <?php echo a <?=</info>');
+      $this->files($dir, $extension);
+      foreach ($this->files as $file) {
+          $this->taskReplaceInFile($file->getRealPath())
+          ->from('<?php echo ')
+          ->to('<?= ')
+          ->run();
+      }
+      $this->say('<info>echo actualizado a php 5.4.</info>');
     }
 }
