@@ -123,12 +123,12 @@ class RoboFile extends \Robo\Tasks
            ->line("\t\t")
            ->line("\t}")
            ->run();
-        //crear directorio para las vistas
-        $this->say("<info>Controlador creado en {$file}</info>");
 
+        $this->say("<info>Controlador creado en {$file}</info>");
       } else {
         $this->say("<error>Controlador ya existía en {$file}</error>");
       }
+      //crear directorio para las vistas
       if (!$fs->exists($viewsDir)) {
         $fs->mkdir($viewsDir);
         $this->say("<info>Carpeta de Vistas creada en {$viewsDir}</info>");
