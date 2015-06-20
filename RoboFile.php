@@ -7,6 +7,7 @@
  */
 
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Filesystem\Filesystem;
 
 class RoboFile extends \Robo\Tasks
 {
@@ -102,5 +103,37 @@ class RoboFile extends \Robo\Tasks
           ->run();
       }
       $this->say('<info>echo actualizado a php 5.4.</info>');
+    }
+
+
+    /* permite crear un controllador sencillo y su respectiva carpeta en views*/
+    public function kumbiaCreateController($controllerName) {
+      $file = "app/controllers/{$controllerName}_controller.php";
+      $viewsDir = "app/views/{$controllerName}";
+      $fs = new Filesystem();
+      if (!$fs->exists($file)) {
+        $this->say("<info>Creando Controlador</info>");
+        //crear archivo
+        $fs->touch($file);
+        //escribir template
+        $controllerName = ucfirst($controllerName);
+        $this->taskWriteToFile($file)
+           ->line("<?php")
+           ->line("\tclass {$controllerName}Controller extends AppController {")
+           ->line("\t\t")
+           ->line("\t}")
+           ->run();
+        //crear directorio para las vistas
+        $this->say("<info>Controlador creado en {$file}</info>");
+
+      } else {
+        $this->say("<error>Controlador ya existía en {$file}</error>");
+      }
+      if (!$fs->exists($viewsDir)) {
+        $fs->mkdir($viewsDir);
+        $this->say("<info>Carpeta de Vistas creada en {$viewsDir}</info>");
+      } else {
+        $this->say("<error>Carpeta de Vistas ya existía en {$viewsDir}</error>");
+      }
     }
 }

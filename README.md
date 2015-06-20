@@ -17,6 +17,7 @@ robo                    | Lista los comandos
 robo kumbia:cache-clean | Limpia la cache de la app
 robo kumbia:update      | Copia la aplicación y la actualiza a v1.0 (no esta terminado)
 robo kumbia:echo-short  | Actualiza <?php echo a <?= PHP 5.4+
+robo kumbia:create-controller  | Crea un controlador sencillo y su carpeta de vistas
 
 
 TIP: Usa una aplicación DIFF para ver las diferencias entre las dos carpetas.
