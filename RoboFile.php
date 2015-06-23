@@ -120,7 +120,7 @@ class RoboFile extends \Robo\Tasks
     }
 
   /**
-   * @description Crea un modelo ActiveRecord
+   * @description Crea un modelo, por defecto de ActiveRecord
    */
   public function kumbiaCreateModel($modelName, $modelClass = 'ActiveRecord') {
     $file = "app/models/{$modelName}.php";
