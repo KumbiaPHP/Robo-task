@@ -88,6 +88,8 @@ class RoboFile extends \Robo\Tasks
     }
     /**
     * @description Crea un controlador sencillo y su carpeta de vistas
+    *
+    * @param string $controllerName Nombre del controlador
     */
     public function kumbiaCreateController($controllerName) {
       $file = "app/controllers/{$controllerName}_controller.php";
@@ -121,6 +123,8 @@ class RoboFile extends \Robo\Tasks
 
   /**
    * @description Crea un modelo, por defecto de ActiveRecord
+   *
+   * @param string $modelName Nombre del modelo
    */
   public function kumbiaCreateModel($modelName, $modelClass = 'ActiveRecord') {
     $file = "app/models/{$modelName}.php";
@@ -146,6 +150,9 @@ class RoboFile extends \Robo\Tasks
 
   /**
    * @description Crea un controlador scaffold para un modelo
+   *
+   * @param string $controllerName Nombre del controlador
+   * @param string $modelName      Nombre del modelo
    */
   public function kumbiaCreateScaffold($controllerName, $modelName) {
     $file = "app/controllers/{$controllerName}_controller.php";
