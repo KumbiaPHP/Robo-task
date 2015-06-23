@@ -16,7 +16,7 @@ Comando | Acción
 robo                    | Lista los comandos
 robo kumbia:cache-clean | Limpia la cache de la app
 robo kumbia:update      | Copia la aplicación y la actualiza a v1.0 (no esta terminado)
-robo kumbia:echo-short  | Actualiza <?php echo a <?= PHP 5.4+
+robo kumbia:echo-short  | Actualiza <?php echo a <?= (PHP 5.4+)
 robo kumbia:create-controller  | Crea un controlador sencillo y su carpeta de vistas
 robo kumbia:create-scaffold  | Crea un controlador con modelo dinámico (scaffold)
 robo kumbia:create-model  | Crea un modelo ActiveRecord

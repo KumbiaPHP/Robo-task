@@ -73,7 +73,7 @@ class RoboFile extends \Robo\Tasks
         $this->say('<info>Cache borrada.</info>');
     }
     /**
-    * @description Actualiza <?php echo a <?= PHP 5.4+
+    * @description Actualiza <?php echo a <?= (PHP 5.4+)
     */
     public function kumbiaEchoShort($dir = 'app/views', $extension = "*.phtml"){
       $this->say('<info>actualizando <?php echo a <?=</info>');
