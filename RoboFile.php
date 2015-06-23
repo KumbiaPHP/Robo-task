@@ -147,7 +147,7 @@ class RoboFile extends \Robo\Tasks
   /**
    * @description Crea un controlador scaffold para un modelo
    */
-  public function kumbiaCreateScaffoldController($controllerName, $modelName) {
+  public function kumbiaCreateScaffold($controllerName, $modelName) {
     $file = "app/controllers/{$controllerName}_controller.php";
     $fs = new Filesystem();
     if (!$fs->exists($file)) {
