@@ -56,6 +56,10 @@ Obsoletos (se usan igual)
 - [ ] ``Html::trClass()`` a ??  css
 - [ ] ``<?php eh()`` a ``<?= h()``
 
+- [ ] Añadir namespace_auth = "default" al cofig.ini
+- [ ] Cambiar el public/index.php
+- [ ] Cambiar public/.htaccess
+
 
 Eliminar
 
