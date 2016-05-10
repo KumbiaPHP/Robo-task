@@ -326,7 +326,7 @@ class RoboFile extends \Robo\Tasks
 				
 				$cTextContent .= "<p>" . PHP_EOL;
 				$cTextContent .= "<strong>" . ucfirst($atributos_arr[$i]) . "</strong><br/>" . PHP_EOL;
-				$cTextContent .= "<span><?= $" . $modelo ."->" . $atributos_arr[$i] . "</span>" . PHP_EOL;
+				$cTextContent .= "<span><?= $" . $modelo ."->" . $atributos_arr[$i] . ";?></span>" . PHP_EOL;
 				$cTextContent .= "</p>" . PHP_EOL;
 				
             }
