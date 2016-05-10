@@ -1,0 +1,8 @@
+<?php View::content();?>
+<h1>Editar %Model% #<?= $%lcaseModel%->id;?></h1>
+<?= Form::open();?>
+%formContent%
+<?= Form::hidden('%lcaseModel%.id');?>
+<?= Form::submit('Guardar');?>
+<?= Html::linkAction('index','Volver');?>
+<?= Form::close();?>
