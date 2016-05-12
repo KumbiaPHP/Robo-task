@@ -1,0 +1,30 @@
+<?php View::content();?>
+<h1>Listado de %Model%</h1>
+<?= Html::linkAction('add', 'Agregar');?>
+<?php if (count($%lcaseModels%) == 0) { ?>
+	<strong>No se han encontrado elementos para %Model%</strong>
+<?php } ?>
+<table class="table table-condensed table-bordered table-striped">
+	<thead>
+		%columnListHead%
+		<td>Opciones</td>
+	</thead>
+	<tbody>
+	<?php foreach($%lcaseModels% as $fila):?>
+		<tr>
+			%columnListBody%
+			<td>
+				<?= Html::linkAction('edit/' . $fila->id,'Editar', 'class="btn btn-info"');?> 
+				<?= Html::linkAction('delete/' . $fila->id,'Borrar', 'class="btn btn-danger" onclick="return confirmar();"');?> 
+			</td>
+		</tr>
+	<?php endforeach;?>
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	function confirmar()
+	{
+		return confirm('Desea eliminar este elemento');
+	}
+</script>

@@ -92,7 +92,7 @@ class RoboFile extends \Robo\Tasks
 	
 	
 	
-	public function kumbiaCreateScaffoldController($controllerName, $modelName, $extendsFrom = 'AppController')
+	public function kumbiaCreateScaffoldController($controllerName, $modelName, $extendsFrom = 'AppController', $template = 'tpl')
 	{
 		$controllerName = strtolower($controllerName);
         $file = "app/controllers/{$controllerName}_controller.php";
@@ -110,7 +110,7 @@ class RoboFile extends \Robo\Tasks
 
 			//crear archivo a partir del template
 			$this->taskWriteToFile($file)
-			    ->textFromFile("templates/controller.tpl.php")
+			    ->textFromFile("templates/controller.{$template}.php")
 			    ->run();
 			
 			//reemplazar elementos
@@ -242,7 +242,7 @@ class RoboFile extends \Robo\Tasks
       //escribir template
       
       $this->taskWriteToFile($file)
-  	    ->textFromFile("templates/view.{$accion}.{$formato}.phtml")
+  	    ->textFromFile("templates/{$formato}/view.{$accion}.phtml")
   	    ->run();	
   	
   	  $this->taskReplaceInFile($file)
@@ -268,10 +268,19 @@ class RoboFile extends \Robo\Tasks
       while ($seguir === "s") {
         $modelo = "";
         $modelo = $this->ask("Indique nombre del modelo: ");
+        
+        $this->say("<info>Modelo extiende de [ActiveRecord|LiteRecord|ActRecord]</info>");
+        $formatoModelo = $this->ask("Modelo extiende: ");
+        $formatoController = "lite";
+        
+        if (strlen(trim($formatoModelo)) == 0 ) {
+        	$formatoModelo = "ActiveRecord";
+        	$formatoController = "tpl";
+        }
 
         if ($this->ask("Generar archivo del Modelo (s/n): ") === "s") {       
             $modelo = strtolower($modelo);
-            $this->kumbiaCreateModel($modelo);
+            $this->kumbiaCreateModel($modelo,$formatoModelo);
         }
 
         $modelo_class = ucfirst($modelo);
@@ -283,10 +292,10 @@ class RoboFile extends \Robo\Tasks
         if (strlen($extiendeDe) == 0) {
             $extiendeDe = "AppController";
         }
-
+        
         
         if ($this->ask("Crear acciones del CRUD predeterminadas (s/n): ") === "s") {       
-            $this->kumbiaCreateScaffoldController($controlador, $modelo, $extiendeDe);
+            $this->kumbiaCreateScaffoldController($controlador, $modelo, $extiendeDe, $formatoController);
         } else {
         	$this->kumbiaCreateController($controlador, $extiendeDe);
         }

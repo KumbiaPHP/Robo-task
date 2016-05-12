@@ -1,0 +1,7 @@
+<?php View::content();?>
+<h1>Agregar %Model%</h1>
+<?= Form::open();?>
+%formContent%
+<?= Form::submit('Agregar', 'class="btn btn-success"');?>
+<?= Html::linkAction('index','Volver', 'class="btn btn-default"');?>
+<?= Form::close();?>
