@@ -1,4 +1,4 @@
-![KumbiaPHP](http://proto.kumbiaphp.com/img/kumbiaphp.png)
+![KumbiaPHP logo](https://rawgit.com/kumbiaphp/kumbiaphp/1.0/default/public/img/kumbiaphp.svg)
 
 # Robo-task
 Robo es un manejador de tareas en php http://robo.li al estilo de Gulp en javascript.
