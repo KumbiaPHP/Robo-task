@@ -22,6 +22,7 @@ robo kumbia:echo-short  | Actualiza <?php echo a <?= (PHP 5.4+)
 robo kumbia:create-controller  | Crea un controlador sencillo y su carpeta de vistas
 robo kumbia:create-scaffold  | Crea un controlador con modelo dinámico (scaffold)
 robo kumbia:create-model  | Crea un modelo, por defecto de ActiveRecord
+robo kumbia:scaffold-console | Inicia una consola interactiva para generar controllers, models y views basados en el gestor de ORM que el desarrollador prefiera (hasta ahora ActiveRecord, LiteRecord o ActRecord)
 
 
 TIP: Usa una aplicación DIFF para ver las diferencias entre las dos carpetas.

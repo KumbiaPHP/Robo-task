@@ -22,6 +22,9 @@ class RoboFile extends \Robo\Tasks
         "View::response('view')" => "View::template(null)"
     );
     private $delete = array();
+	private $reemplazo = array();
+	private $reemplaza = array();
+	
     // define public methods as commands
     /**
     * @description Convertir una app beta2-0.9 a 1.0
@@ -86,12 +89,66 @@ class RoboFile extends \Robo\Tasks
       }
       $this->say('<info>echo actualizado a php 5.4.</info>');
     }
+	
+	
+	
+	public function kumbiaCreateScaffoldController($controllerName, $modelName, $extendsFrom = 'AppController', $template = 'tpl')
+	{
+		$controllerName = strtolower($controllerName);
+        $file = "app/controllers/{$controllerName}_controller.php";
+        $viewsDir = "app/views/{$controllerName}";
+        $fs = new Filesystem();
+        if (!$fs->exists($file)) {
+	        $this->say("<info>Creando Controlador $controllerName</info>");
+	        //crear archivo
+	        $fs->touch($file);
+	        //escribir template
+	        $controllerName = ucfirst($controllerName);
+			$modelName = ucfirst($modelName);
+			
+			$fs->touch($file);
+
+			//crear archivo a partir del template
+			$this->taskWriteToFile($file)
+			    ->textFromFile("templates/controller.{$template}.php")
+			    ->run();
+			
+			//reemplazar elementos
+			$reemplazar = array('%Item%','%BaseController%','%Model%','%lcaseModels%','%lcaseModel%');
+			
+			$reemplazo = array(
+				 $controllerName, 
+				 $extendsFrom,
+				 $modelName,
+				 strtolower($modelName) . 's',
+				 strtolower($modelName),
+			);
+			
+			$this->taskReplaceInFile($file)
+					->from($reemplazar)
+					->to($reemplazo)
+					->run();
+			
+			$this->say("<info>Controlador $controllerName ha sido creado</info>");	
+		} else {
+			$this->say("<error>Controlador $controllerName ya existía!</error>");	
+		}
+        if (!$fs->exists($viewsDir)) {
+          $fs->mkdir($viewsDir);
+          $this->say("<info>Carpeta de Vistas creada en {$viewsDir}</info>");
+        } else {
+          $this->say("<error>Carpeta de Vistas ya existía en {$viewsDir}</error>");
+        }
+	}
+	
+	
     /**
     * @description Crea un controlador sencillo y su carpeta de vistas
     *
     * @param string $controllerName Nombre del controlador
     */
-    public function kumbiaCreateController($controllerName) {
+    public function kumbiaCreateController($controllerName, $baseController = 'AppController') {
+      $controllerName = strtolower($controllerName);
       $file = "app/controllers/{$controllerName}_controller.php";
       $viewsDir = "app/views/{$controllerName}";
       $fs = new Filesystem();
@@ -101,18 +158,31 @@ class RoboFile extends \Robo\Tasks
         $fs->touch($file);
         //escribir template
         $controllerName = ucfirst($controllerName);
-        $this->taskWriteToFile($file)
-           ->line("<?php")
-           ->line("\tclass {$controllerName}Controller extends AppController {")
-           ->line("\t\t")
-           ->line("\t}")
-           ->run();
-        //crear directorio para las vistas
+        
+		$this->taskWriteToFile($file)
+	   	    ->textFromFile("templates/controller.simple.tpl.php")
+	   	    ->run();
+	
+	   	//reemplazar elementos
+	   	$reemplazar = array('%Item%','%BaseController%');
+	
+	   	$reemplazo = array(
+	   		 $controllerName,
+	   		 $baseController
+	   	);
+	
+	   	$this->taskReplaceInFile($file)
+	   			->from($reemplazar)
+	   			->to($reemplazo)
+	   			->run();
+	
         $this->say("<info>Controlador creado en {$file}</info>");
 
       } else {
         $this->say("<error>Controlador ya existía en {$file}</error>");
       }
+	  
+	  //crear directorio para las vistas del controlador
       if (!$fs->exists($viewsDir)) {
         $fs->mkdir($viewsDir);
         $this->say("<info>Carpeta de Vistas creada en {$viewsDir}</info>");
@@ -127,6 +197,7 @@ class RoboFile extends \Robo\Tasks
    * @param string $modelName Nombre del modelo
    */
   public function kumbiaCreateModel($modelName, $modelClass = 'ActiveRecord') {
+    $modelName = strtolower($modelName);
     $file = "app/models/{$modelName}.php";
     $fs = new Filesystem();
     if (!$fs->exists($file)) {
@@ -135,49 +206,166 @@ class RoboFile extends \Robo\Tasks
       $fs->touch($file);
       //escribir template
       $modelName = ucfirst($modelName);
-      $this->taskWriteToFile($file)
-         ->line("<?php")
-         ->line("\tclass {$modelName} extends {$modelClass} {")
-         ->line("\t\t")
-         ->line("\t}")
-         ->run();
-
+	//crear archivo a partir del template
+	$this->taskWriteToFile($file)
+	    ->textFromFile("templates/model.tpl.php")
+	    ->run();
+	
+	//reemplazar elementos
+	$reemplazar = array('%Model%','%ModelExtends%');
+	
+	$reemplazo = array(
+		 $modelName,
+		 $modelClass
+	);
+	
+	$this->taskReplaceInFile($file)
+			->from($reemplazar)
+			->to($reemplazo)
+			->run();
+	
       $this->say("<info>Modelo creado en {$file}</info>");
     } else {
       $this->say("<error>Modelo ya existía en {$file}</error>");
     }
   }
 
-  /**
-   * @description Crea un controlador scaffold para un modelo
-   *
-   * @param string $controllerName Nombre del controlador
-   * @param string $modelName      Nombre del modelo
-   */
-  public function kumbiaCreateScaffold($controllerName, $modelName) {
-    $file = "app/controllers/{$controllerName}_controller.php";
+  public function kumbiaCreateView($controller, $accion, $formato = 'tpl') {
+    $file = "app/views/{$controller}/{$accion}.phtml";
+    $viewsDir = "app/views/{$controller}";
     $fs = new Filesystem();
+	
     if (!$fs->exists($file)) {
-      $this->say("<info>Creando Controlador</info>");
+      $this->say("<info>Creando Vista</info>");
       //crear archivo
       $fs->touch($file);
       //escribir template
-      $controllerName = ucfirst($controllerName);
+      
       $this->taskWriteToFile($file)
-         ->line("<?php")
-         ->line("\tclass {$controllerName}Controller extends ScaffoldController {")
-         ->line("\t\t" . 'public $model = "' . $modelName . '";')
-         ->line("\t}")
-         ->run();
-
-      $this->say("<info>Controlador creado en {$file}</info>");
+  	    ->textFromFile("templates/{$formato}/view.{$accion}.phtml")
+  	    ->run();	
+  	
+  	  $this->taskReplaceInFile($file)
+  			->from($this->reemplaza)
+  			->to($this->reemplazo)
+  			->run();
+      $this->say("<info>Vista creada en {$file}</info>");
     } else {
-      $this->say("<error>Controlador ya existía en {$file}</error>");
-    }
-    //verificar existencia del modelo, y en caso que no exista crearlo
-    $modelFile = "app/models/{$modelName}.php";
-    if (!$fs->exists($modelFile)) {
-      $this->kumbiaCreateModel($modelName);
-    }
+      $this->say("<error>Vista ya existía en {$file}</error>");
+    }      
+  }
+  
+
+  /**
+   * @description Consola Interactiva para crear Scaffolds Estáticos
+   *
+   */
+  public function kumbiaScaffoldConsole()
+  {
+      $this->say("<info>Bienvenido al generador de Cruds</info>");
+      
+      $seguir = "s";
+      while ($seguir === "s") {
+        $modelo = "";
+        $modelo = $this->ask("Indique nombre del modelo: ");
+        
+        $this->say("<info>Modelo extiende de [ActiveRecord|LiteRecord|ActRecord]</info>");
+        $formatoModelo = $this->ask("Modelo extiende: ");
+        $formatoController = "lite";
+        
+        if (strlen(trim($formatoModelo)) == 0 ) {
+        	$formatoModelo = "ActiveRecord";
+        	$formatoController = "tpl";
+        }
+
+        if ($this->ask("Generar archivo del Modelo (s/n): ") === "s") {       
+            $modelo = strtolower($modelo);
+            $this->kumbiaCreateModel($modelo,$formatoModelo);
+        }
+
+        $modelo_class = ucfirst($modelo);
+        $modelo_input = strtolower($modelo);
+
+        $controlador = $this->ask("Nombre de clase para controlador (sin sufijo Controller): ");
+        $controlador_archivo = strtolower($controlador) . "_controller.php";
+        $extiendeDe = $this->ask("Controlador hereda de [AppController]: ");
+        if (strlen($extiendeDe) == 0) {
+            $extiendeDe = "AppController";
+        }
+        
+        
+        if ($this->ask("Crear acciones del CRUD predeterminadas (s/n): ") === "s") {       
+            $this->kumbiaCreateScaffoldController($controlador, $modelo, $extiendeDe, $formatoController);
+        } else {
+        	$this->kumbiaCreateController($controlador, $extiendeDe);
+        }
+        
+        //crear vistas
+        if ($this->ask("Crear vistas CRUD predeterminadas? (s/n)") === "s") {
+            $this->say("<info>Indique los atributos separados por coma (no indique id)</info>");
+            $atributos = $this->ask("Atributos: ");
+            
+			if (strpos($atributos, ",") != FALSE) {
+				$atributos_arr = explode(",", $atributos);
+			} else {
+				$atributos_arr = array($atributos); //elemento unico
+			}
+			
+            $this->say("<info>Indique formato de las vitas [tpl]</info>");
+            $formato = $this->ask("Formato: ");
+			
+			if (strlen(trim($formato)) == 0 ) {
+				$formato = "tpl";
+			}
+			
+            
+            $cListHead = "";
+			$cListBody = "";
+			$cFormContent = "";
+			$cTextContent = "";
+            for($i = 0; $i < count($atributos_arr); $i++) {
+                $atributos_arr[$i] = trim(strtolower($atributos_arr[$i]));
+				$cListHead .= "<th>" . $atributos_arr[$i] . "</th>" . PHP_EOL;
+				$cListBody .= '<td><?= $fila->' . $atributos_arr[$i] . ';?></td>' . PHP_EOL;
+				
+				$cFormContent .= "<p>" . PHP_EOL;
+				$cFormContent .= "<strong>" . ucfirst($atributos_arr[$i]) . "</strong><br/>" . PHP_EOL;
+				$cFormContent .= "<?= Form::text('" . $modelo . "." . $atributos_arr[$i] . "');?>" . PHP_EOL;
+				$cFormContent .= "</p>" . PHP_EOL;
+				
+				$cTextContent .= "<p>" . PHP_EOL;
+				$cTextContent .= "<strong>" . ucfirst($atributos_arr[$i]) . "</strong><br/>" . PHP_EOL;
+				$cTextContent .= "<span><?= $" . $modelo ."->" . $atributos_arr[$i] . ";?></span>" . PHP_EOL;
+				$cTextContent .= "</p>" . PHP_EOL;
+				
+            }
+            
+			//contenido para index
+			$this->reemplaza = array("%Model%","%lcaseModels%","%columnListHead%","%columnListBody%");
+			$this->reemplazo = array(ucfirst($modelo), $modelo . "s", $cListHead, $cListBody);
+			$this->kumbiaCreateView(strtolower($controlador), "index", $formato);            
+            
+			//contenido para add
+			$this->reemplaza = array("%Model%","%formContent%");
+			$this->reemplazo = array(ucfirst($modelo), $cFormContent);
+            $this->kumbiaCreateView(strtolower($controlador), "add", $formato);
+            
+            //contenido para edit
+            $this->reemplaza = array("%Model%","%formContent%","%lcaseModel%");
+			$this->reemplazo = array(ucfirst($modelo), $cFormContent, strtolower($modelo));            
+            $this->kumbiaCreateView(strtolower($controlador), "edit", $formato);
+			
+			//contenido para show
+			$this->reemplaza = array("%Model%","%lcaseModel%","%textContent%");
+			$this->reemplazo = array(ucfirst($modelo), $modelo, $cTextContent);
+			$this->kumbiaCreateView(strtolower($controlador), "show", $formato);
+        }
+        
+        
+        $seguir = $this->ask("Crear otro CRUD (s/n): ");
+        
+        
+      }
+      $this->say("<info>Hasta pronto!</info>");          
   }
 }
