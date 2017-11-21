@@ -49,13 +49,13 @@ Obsoletos (se usan igual)
 - [x] ``Flash::success`` a ``Flash::valid()``
 - [x] ``Util::uncamelize`` a ``Util::smallcase``
 - [x] ``View::response('view')`` a ``View::template(null)``
-- [ ] ``Util::mkpath()`` a ``FileUtil::mkdir()``
-- [ ] ``Util::removedir()`` a ``FileUtil::rmdir()``
-- [ ] ``Util::lcfirst()`` a ``lcfirst()``
+- [x] ``Util::mkpath()`` a ``FileUtil::mkdir()``
+- [x] ``Util::removedir()`` a ``FileUtil::rmdir()``
+- [x] ``Util::lcfirst()`` a ``lcfirst()``
 - [ ] ``Util::array_merge_overwrite($a1, $a2)`` a ``$a2 + $a1``
 - [ ] ``Util::array_insert($array, $position, $insert)`` a ``array_splice($array, $position, 0, $insert)``
 - [ ] ``Html::trClass()`` a ??  css
-- [ ] ``<?php eh()`` a ``<?= h()``
+- [x] ``<?php eh()`` a ``<?= h()``
 
 - [ ] Añadir namespace_auth = "default" al cofig.ini
 - [ ] Cambiar el public/index.php
